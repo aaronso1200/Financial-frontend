@@ -1,0 +1,10 @@
+1. Add user display name, email in user sign up page  //complete
+2. Verify user password in the signup form (frontend check) //complete
+3. Verify user login name and user signup name in the signup form (backend check) //complete
+4. Send verification code to user email for registration
+5. Add configuration page for user to change user information (display name etc.)
+6. Display user display name in post
+7. Save creation date in token so user cannot login with expire token
+8. Add websocket for instance chatroom
+9. Add place to store user favourite post
+10. Add admin role to manage all the user post.
