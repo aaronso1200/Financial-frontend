@@ -1,0 +1,11 @@
+
+<h1>Confirmation</h1>
+<hr>
+<p>Are you sure to delete the following account? </p>
+<p>(Will also delete all account records)</p>
+<p>Name: {{data.name}}</p>
+<br>
+<div>
+<button mat-raised-button style="right:5px;"(click) = delete(data.id) >Yes</button>
+  <button mat-raised-button style="left:5px;" mat-dialog-close >No</button>
+</div>

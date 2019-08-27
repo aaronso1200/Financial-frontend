@@ -1,0 +1,22 @@
+
+<h1>{{mode | titlecase}}</h1>
+<div>
+  <hr>
+  <form (submit) = "onSave(createForm)" #createForm = "ngForm">
+
+    <mat-form-field>
+      <input matInput required name="name" ngModel placeholder="Name" floatLabel="always" #NameInput= "ngModel" >
+      <mat-error>
+        <div *ngIf="NameInput.hasError('required')">This field is required</div>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput  name="description" ngModel placeholder="Description" floatLabel="always" #DescriptionInput= "ngModel">
+    </mat-form-field>
+
+    <br>
+      <button type="submit"  mat-raised-button style="..." [disabled]="createForm.invalid"> Submit</button>
+      <button mat-raised-button style="left:5px;" mat-dialog-close >Cancel</button>
+  </form>
+</div>

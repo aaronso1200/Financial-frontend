@@ -1,0 +1,45 @@
+<mat-list dense >
+  <h1> Account Records </h1>
+  <div class="head">
+    <form  #filterForm="ngForm">
+    <mat-form-field>
+      <mat-label>Account</mat-label>
+      <mat-select  required (selectionChange)="submitFilter($event)">
+        <mat-option *ngFor="let account of accountList"  [value]="account.id" >
+          {{account.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button ><mat-icon>keyboard_arrow_up</mat-icon></button>
+    <button mat-icon-button><mat-icon>keyboard_arrow_down</mat-icon></button>
+    </form>
+      <span class= "space"></span>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class= "spinner"><mat-spinner *ngIf = 'isLoading'></mat-spinner></div>
+
+  <div *ngIf = '!isLoading'>
+    <div class ="list" *ngFor = "let record of recordsList.slice()" >
+      <mat-list-item >
+        <mat-icon mat-list-icon  svgIcon= {{record.icon}}></mat-icon>
+        <p mat-line class="list-header">{{record.description}}</p>
+        <span mat-line>{{record.displayDate}}</span>
+        <span class="list_right">
+                      <p mat-line><span *ngIf="record.recordType=='expenditure'" class="expenditure">-$ {{record.amount.toString().substring(1)}}</span>
+                        <span *ngIf="record.recordType=='deposit'" class="deposit">+$ {{record.amount}}</span></p>
+          </span>
+
+        <span>
+                          <button mat-icon-button (click) = "recordEdit(record.id)"> <mat-icon>edit</mat-icon> </button>
+      </span>
+        <span>
+                          <button mat-icon-button (click) = "recordDelete(record.id)"> <mat-icon>delete</mat-icon> </button>
+      </span>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </div>
+  </div>
+  <mat-paginator [length]="totalRecords" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page) = "onChangedPage($event)"></mat-paginator>
+</mat-list>

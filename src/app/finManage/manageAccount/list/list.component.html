@@ -1,0 +1,25 @@
+<div class="main_container">
+<mat-list>
+  <h1> Accounts </h1>
+  <button mat-button (click) = "create()"><mat-icon>add</mat-icon></button>
+  <mat-divider></mat-divider>
+  <div class ="list" *ngFor = "let data of dataList.slice().reverse()">
+
+    <mat-list-item>
+
+        <mat-icon mat-list-icon (click)="iconSelect(data.id)" svgIcon= {{data.icon}}></mat-icon>
+
+
+    <h4 mat-line style="text-align:left">{{data.name}}</h4>
+    <p mat-line style="text-align:left">{{data.description}}</p>
+    <span class="list_right">
+      <button mat-icon-button (click) = "edit(data.id)"> <mat-icon>edit</mat-icon> </button>
+    </span>
+      <span class="list_right">
+      <button mat-icon-button (click) = "delete(data.id)"> <mat-icon>delete</mat-icon></button>
+      </span>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </div>
+</mat-list>
+</div>

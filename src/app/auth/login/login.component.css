@@ -1,0 +1,21 @@
+mat-form-field,textarea{
+  width:100%;
+
+}
+
+.mat-raised-button{
+  background-color:rgba(211, 210, 210, 0.808);
+  height:40px;
+}
+
+mat-form-field{
+  margin-top: 1rem;
+}
+
+.warning {
+  color: rgb(224, 99, 99);
+}
+
+.greetings {
+  color: rgb(28, 211, 28);
+}

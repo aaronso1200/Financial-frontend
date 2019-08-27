@@ -1,0 +1,66 @@
+mat-form-field,textarea{
+  width:100%;
+
+}
+
+.mat-raised-button{
+  background-color:rgba(211, 210, 210, 0.808);
+  height:40px;
+}
+
+mat-form-field{
+  margin-top: 1rem;
+}
+
+.valid-icon{
+  color:rgba(42, 206, 27, 0.938)
+}
+
+.invalid-icon{
+  color:red
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+input[type="file"]{
+  visibility: hidden;
+}
+
+.image-preview{
+  height: 5 rem;
+  margin : 1 rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.animated {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+mat-slide-toggle{
+ margin-top: 10px;
+ margin-right: 20px;
+ float:right;
+}

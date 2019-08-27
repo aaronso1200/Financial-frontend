@@ -1,0 +1,16 @@
+.list_right {
+  float:right;
+}
+.list {
+  height: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.mat-button {
+  width: 10px;
+  margin: 0;
+  padding:0;
+}
+
+

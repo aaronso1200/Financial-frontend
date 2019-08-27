@@ -1,0 +1,15 @@
+<mat-card>
+<p>The system has send a verification code to the following email:</p>
+  <p>Email: {{profile?.email}}</p>
+  <br>
+Click this button if you cannot receive the code:
+<button (click)="sendCodetoEmail()" mat-raised-button name="resend">Send</button>
+<br>
+<form (submit)="onVerify(verifyForm,$event)" #verifyForm = "ngForm">
+<input ngModel matInput name="code" #verifyCodeInput= "ngModel">
+<br>
+<button mat-raised-button name="submit"> Verify Account </button>
+
+</form>
+  <p *ngIf="verifyFailed"> You entered a wrong code</p>
+</mat-card>

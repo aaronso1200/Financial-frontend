@@ -1,0 +1,60 @@
+<body>
+<mat-sidenav-container
+  class="main-container" (backdropClick)="sidenav.close()" >
+  <mat-sidenav #sidenav  disableClose>
+    <a mat-button style="height: 0; position: absolute;"> <!-- 'absorbs sidenav first button focus behaviour --></a>
+    <div class="side-nav-title">
+      menu
+    </div>
+    <button mat-button routerLink="/" (click)="sidenav.close();menuText='Main Page'"><mat-icon>home</mat-icon> Main Page</button>
+    <span *ngIf= "!userAuthenticated" >
+         <button mat-button routerLink="/signup" (click)="sidenav.close();menuText='Sign up'"><mat-icon>sentiment_satisfied_alt</mat-icon>Sign Up</button>
+    </span>
+    <div *ngIf = "userAuthenticated">
+      <button mat-button id="changePassword" (click)= "changePassword()" [autofocus]="false" routerLink="/change-password"><mat-icon>account_circle</mat-icon>  Change password</button>
+      <button mat-button id="profile" (click)= "openProfile()" [autofocus]="false"><mat-icon>account_circle</mat-icon>  {{profile?.displayName}}</button>
+      <button mat-button (click)="sidenav.close();menuText='Verify Account'" routerLink="/verification"><mat-icon>local_post_office</mat-icon> Verify Account </button>
+      <button mat-button (click)="sidenav.close();menuText='New Post'" routerLink="/post-create"><mat-icon>local_post_office</mat-icon> New Post </button>
+    <!--<button mat-button routerLink="finManage" (click)="sidenav.close();menuText='Account Manage'"><mat-icon>account_balance</mat-icon>Financial Account Management</button>-->
+    <mat-expansion-panel class="mat-elevation-z0" >
+      <mat-expansion-panel-header style="padding-left:16px" [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
+      <mat-panel-title style="word-wrap:break-word!important;display:block !important">
+        <mat-icon style="padding-right:3px;padding-top:5px; float:left">account_balance</mat-icon>
+        <span style="font-weight:500">Financial Account <br>Management</span>
+      </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <a mat-button routerLink= "/finManage/manageAccount" (click) ="sidenav.close()" style="color:black"> Add Account</a>
+      <a mat-button routerLink= "/finManage/manageRecord" (click) ="sidenav.close()" style="color:black" > Add record </a>
+      <a mat-button routerLink="/finManage/recordByAccount" (click)="sidenav.close()" style="color:black"> Account records</a>
+      <a mat-button routerLink= "/finManage/information" (click) ="sidenav.close()" style="color:black" > Analysis</a>
+
+    </mat-expansion-panel>
+    </div> <!-- Authenticated end-->
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+<mat-toolbar>
+  <span class="left">
+  <button mat-icon-button #listbutton (click)="sidenav.open()"><mat-icon>list</mat-icon></button>
+  </span>
+  <span class= "space"></span>
+  <span class= "fixed-center">{{menuText}}</span>
+  <ul>
+    <span *ngIf="!userAuthenticated">
+      <a mat-button id="login" routerLink="/login"> Login </a>
+    </span>
+    <span *ngIf= "userAuthenticated">
+     <a mat-button id="logout" (click)= "logout()">Logout</a>
+  </span>
+  </ul>
+</mat-toolbar>
+
+<main>
+<router-outlet> </router-outlet>
+</main>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</body>

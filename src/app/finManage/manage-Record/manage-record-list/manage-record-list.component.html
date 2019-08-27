@@ -1,0 +1,44 @@
+
+
+  <mat-list dense >
+    <h1> Records </h1>
+    <div class="head">
+    <mat-form-field >
+      <input matInput [matDatepicker]="DatePicker"
+             placeholder="Choose a date"
+             disabled (dateInput) ="InputDate($event)"
+      [value] ="date">
+      <mat-datepicker-toggle matSuffix [for]="DatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #DatePicker disabled="false" touchUi="true"></mat-datepicker>
+    </mat-form-field>
+    <button mat-icon-button (click) = "changeDate(-1)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+     <button mat-icon-button (click) = "changeDate(+1)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+      <span class= "space"></span>
+    <button mat-icon-button (click) = "create()"><mat-icon>add</mat-icon></button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class= "spinner"><mat-spinner *ngIf = 'isLoading'></mat-spinner></div>
+
+    <div *ngIf = '!isLoading'>
+      <div class ="list" *ngFor = "let record of recordsList.slice().reverse()" >
+        <mat-list-item >
+          <mat-icon mat-list-icon  svgIcon= {{record.icon}}></mat-icon>
+          <p mat-line class="list-header">{{record.finAccount}}</p>
+          <span mat-line>{{record.description}}</span>
+          <span class="list_right">
+                      <p mat-line><span *ngIf="record.recordType=='expenditure'" class="expenditure">-$ {{record.amount.toString().substring(1)}}</span>
+                        <span *ngIf="record.recordType=='deposit'" class="deposit">+$ {{record.amount}}</span></p>
+          </span>
+          <span class="list_right_button">
+                          <button mat-icon-button (click) = "recordEdit(record.id)"> <mat-icon>edit</mat-icon> </button>
+      </span>
+          <span class="list_right_button">
+                          <button mat-icon-button (click) = "recordDelete(record.id)"> <mat-icon>delete</mat-icon> </button>
+      </span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </div>
+    </div>
+</mat-list>

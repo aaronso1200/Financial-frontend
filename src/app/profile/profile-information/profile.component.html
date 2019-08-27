@@ -1,0 +1,17 @@
+<mat-spinner *ngIf= "isLoading"> </mat-spinner>
+<div *ngIf= "!isLoading">
+  <h1>Profile</h1>
+<hr>
+  <p>  Display Name: {{profile?.displayName }}</p>
+<p>User Name: {{profile?.loginName}} </p>
+<p>Email: {{profile?.email }}</p>
+<p>Verified: {{profile?.verified }}</p>
+  <mat-divider></mat-divider>
+  <br>
+  <div style="text-align: center">
+<button mat-raised-button (click)="editProfile()">Edit</button>
+  </div>
+
+  <div></div>
+
+</div>

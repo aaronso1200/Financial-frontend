@@ -1,0 +1,80 @@
+<!--suppress ThisExpressionReferencesGlobalObjectJS -->
+<mat-card>
+  <mat-spinner *ngIf= "isLoading"> </mat-spinner>
+  <span *ngIf= "!isLoading">
+  <h1> Sign Up</h1>
+  <form autocomplete="off" [formGroup]= "form" (submit)="onSignUp()"  *ngIf= "!isLoading">
+      <mat-form-field>
+          <input autocomplete="off"
+                 floatLabel="always" formControlName="loginName"
+                 matInput
+                 name="loginName"
+                 placeholder="User name"
+                 required
+          >
+          <mat-error>
+            <div *ngIf="form.get('loginName').hasError('required')">This field is required</div>
+            <div *ngIf="form.get('loginName').hasError('minlength')">Login name length should be greater than 3</div>
+            <div *ngIf="form.get('loginName').hasError('specialChar')">Your login name must be English cannot contain speical character</div>
+            <div *ngIf="form.get('loginName').hasError('startChar')">Your login name must start with A-Z</div>
+            <div *ngIf="form.get('loginName').hasError('nameExists')"> Username already exists. </div>
+          </mat-error>
+      </mat-form-field>
+        <mat-form-field>
+          <input (ngModelChange)=checkPasswordStrength($event) [matTooltipPosition]="position" formControlName="password"
+                 matInput
+                 matTooltip='Your password should include at least one lower case letter, one upper case letter and one special character'
+                 name="password"
+                 placeholder="Password"
+                 required
+                 type={{password_type}}
+          >
+          <mat-error>
+              <div *ngIf="form.get('password').hasError('required')">This field is required</div>
+              <div  *ngIf="form.get('password').hasError('minlength')">Password length should be greater than 6</div>
+              <div  *ngIf= "form.get('password').hasError('specialChar')"> Your password should include at least one special character such as !@#$%^&*</div>
+              <div  *ngIf= "form.get('password').hasError('lowerChar')"> Your password should include at least one lower case letter</div>
+              <div  *ngIf= "form.get('password').hasError('upperChar')"> Your password should include at least one upper case letter</div>
+          </mat-error>
+        </mat-form-field>
+        <p *ngIf= "scorecolor" [className]="scorecolor">Your password is {{this.passwordStrength}}</p>
+        <progress *ngIf= "scorecolor" [value]="passwordScore" [className]="scorecolor" max="100"> </progress>
+      <mat-form-field>
+          <input [matTooltipPosition]="position" formControlName="confirmPassword" matInput
+                 matTooltip='Please re-enter your password'
+                 name="confirmPassword"
+                 placeholder="Confirm password"
+                 required
+                 type="password"
+          >
+          <mat-error>
+             <div *ngIf="form.get('confirmPassword').hasError('required')">This field is required</div>
+             <div *ngIf="form.get('confirmPassword').hasError('difference')">The password is not equal to your first password</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input [matTooltipPosition]="position" formControlName="email" matInput matTooltip='Please input the email for registration' name="email"
+                 placeholder="Register Email"
+                 required
+                 type="text">
+          <mat-error>
+            <div *ngIf="form.get('email').hasError('required')">This field is required</div>
+            <div *ngIf="form.get('email').hasError('typeError')">Please input an valid email</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type= "text" name="displayName" required
+          placeholder="Nickname"
+          formControlName="displayName"
+          matTooltip='This will be your display nickname'
+          [matTooltipPosition]= "position">
+          <mat-error>
+            <div *ngIf="form.get('displayName').hasError('required')">This field is required</div>
+            <div *ngIf="form.get('displayName').hasError('nameExists')">Displayname already exists.</div>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button type="submit" [disabled]="form.invalid">Sign up</button>
+      </form>
+</span>
+<br>
+</mat-card>

@@ -1,0 +1,77 @@
+
+<div>
+  <h1>{{mode | titlecase}}</h1>
+  <br>
+  <form (submit) = "onSave(createForm)" #createForm = "ngForm">
+      <mat-form-field *ngIf="isMobile===false"  >
+        <input  required matInput [matDatepicker]="DatePicker"
+                placeholder="Choose a date"
+                disabled (dateInput) ="date=parseDate($event.value)"
+                [value] ="date"
+        >
+        <mat-datepicker-toggle matSuffix [for]="DatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #DatePicker disabled="false" ></mat-datepicker>
+        <mat-hint>
+          <div *ngIf="dateInvalid == true" style="color:red">This field is required</div>
+        </mat-hint>
+      </mat-form-field>
+
+
+      <mat-form-field *ngIf="isMobile===true" >
+        <input required matInput type="date"  ngModel #MobileDateInput ="ngModel"
+               placeholder="Choose a Date" floatLabel="always"
+               (input)="date=parseDate($event.target.value)"  [value]="date|date:'yyyy-MM-dd'">
+        <mat-hint>
+          <div *ngIf="dateInvalid == true" style="color:red">This field is required</div>
+        </mat-hint>
+      </mat-form-field>
+      <br>
+
+    <mat-form-field >
+      <mat-label>Record Type</mat-label>
+      <mat-select required [(ngModel)] = "recordType" name = "recordType">
+        <mat-option value = "deposit">Deposit</mat-option>
+        <mat-option value="expenditure">Expenditure</mat-option>
+        <mat-option *ngIf="mode ==='create'" value = "transfer">Transfer</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+      <mat-form-field>
+        <mat-label *ngIf="recordType !=='transfer'">Account</mat-label>
+        <mat-label *ngIf="recordType ==='transfer'">From Account</mat-label>
+        <mat-select required [(ngModel)] = "accountSelectFrom" name = "accountSelectFrom" (selectionChange)="selectAccount($event)">
+          <mat-option *ngFor="let account of accountList"  [value]="account.id" >
+            {{account.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+
+    <div *ngIf = "recordType ==='transfer'">
+    <mat-form-field >
+      <mat-label>To Account</mat-label>
+      <mat-select required [(ngModel)] = "accountSelectTo" name = "accountTo">
+        <mat-option *ngFor="let account of filteredAccountList"  [value]="account.id" >
+          {{account.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    </div>
+
+      <mat-form-field>
+        <input required matInput  type = "number" name="amount" ngModel placeholder="Amount" floatLabel="always" #AmountInput= "ngModel">
+        <mat-error>
+          <div *ngIf="AmountInput.hasError('required')">This field is required</div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput  name="description" ngModel placeholder="Description" floatLabel="always" #DescriptionInput= "ngModel">
+      </mat-form-field>
+
+      <br>
+      <button type="submit"  mat-raised-button style="..." [disabled]="createForm.invalid"> Submit</button>
+      <button mat-raised-button mat-dialog-close >Cancel</button>
+  </form>
+</div>

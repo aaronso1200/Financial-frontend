@@ -1,0 +1,12 @@
+<h1>Confirmation</h1>
+<hr>
+<p>Do you sure delete the following record? </p>
+<p><mat-icon mat-list-icon  svgIcon= {{record.icon}}></mat-icon>{{record.finAccount}}</p>
+<p>Description: {{record.description}}</p>
+<p>RecordType: {{record.recordType}}</p>
+<p>Amount: ${{record.amount}}</p>
+<br>
+<div>
+  <button mat-raised-button style="right:5px;" (click) = "delete(record.id)" >Yes</button>
+  <button mat-raised-button style="left:5px;" mat-dialog-close >No</button>
+</div>

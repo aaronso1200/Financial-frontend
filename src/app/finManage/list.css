@@ -1,0 +1,67 @@
+.spinner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.space{
+  flex: 2 2 auto;
+  flex-shrink:0;
+  text-align: center;
+  color: white;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expenditure
+{
+  color:red
+}
+
+.deposit
+{
+  color:forestgreen;
+}
+
+.list_right {
+  float:left;
+  width: 300px;
+}
+.list {
+  height: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.mat-button {
+  width: 10px;
+  margin: 0;
+  padding:0;
+}
+
+.list-header {
+  font-size: 18px !important;
+}
+
+.red-icon {
+  color: red;
+}
+.red-icon .svg {
+  fill: red
+}
+
+.flex-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.space{
+  flex: 1 1 auto !important;
+  flex-shrink:0 !important;
+  text-align: center !important;
+}

@@ -1,0 +1,13 @@
+
+<div>
+  <h1> Icons</h1>
+  <hr>
+  <div *ngIf = 'isLoading' style = 'align: center'><mat-spinner></mat-spinner></div>
+  <div *ngIf = '!isLoading'>
+    <span *ngFor="let icon of iconList">
+     <button mat-icon-button (click) ="chooseIcon(icon.name)"><mat-icon  svgIcon= {{icon.name}}></mat-icon></button>
+    </span>
+    <br>
+    <button mat-raised-button mat-dialog-close style="width:100px" >Close</button>
+  </div>
+</div>

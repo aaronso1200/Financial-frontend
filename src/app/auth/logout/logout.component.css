@@ -1,0 +1,24 @@
+
+.mat-raised-button{
+  background-color:rgba(211, 210, 210, 0.808);
+  height:40px;
+  width:100px;
+  display: inline-block;
+}
+
+.center {
+  margin: auto;
+  width: 400px;
+  padding: 10px;
+}
+
+p {
+  text-align: center;
+}
+
+h1 {
+  padding:0px;
+  text-align: center;
+  margin: 0px;
+}
+

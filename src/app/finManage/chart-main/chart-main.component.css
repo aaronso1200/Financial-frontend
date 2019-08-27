@@ -1,0 +1,101 @@
+
+
+
+
+.line-chart-container {
+  display:inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  /*min-width: 400px;*/
+}
+
+
+.expenditure
+{
+  color:red
+}
+
+.deposit
+{
+  color:forestgreen;
+}
+
+.list_right {
+  float:left;
+  width: 300px;
+}
+.list {
+  height: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+ td  {
+  border: 1px dotted lightgrey;
+}
+
+
+
+ @media only screen and (max-width:768px) {
+   .chart-container{
+    align-content: center;
+     text-align: center;
+   }
+
+   .line-chart-canvas{
+     /*height:250px;*/
+     margin:auto;
+     display:inline;
+     height: 50vw  !important;
+     width:80vw !important;
+     border-style:solid;
+     border-color:lightgrey;
+     border-width:thin;
+   }
+
+
+   .doughnut-chart-container {
+     display:inline-block;
+     /*min-width: 200px;*/
+      width: 80vw !important;
+     content-align:center;
+     border-style:solid;border-color:lightgrey;border-width:thin;
+     overflow: hidden;
+     white-space: nowrap;
+   }
+ }
+
+@media only screen and (min-width:768px) {
+  .chart-container{
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .line-chart-canvas{
+    /*height:250px;*/
+    margin:auto;
+    display:inline;
+    width:750px !important;
+    border-style:solid;
+    border-color:lightgrey;
+    border-width:thin
+  }
+
+
+  .doughnut-chart-container {
+    display:inline-block;
+    /*min-width: 200px;*/
+    /*min-height: 400px;*/
+    height: 300px !important;
+    width: 500px !important;
+    content-align:center;
+    border-style:solid;border-color:lightgrey;border-width:thin;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

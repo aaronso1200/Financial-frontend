@@ -1,0 +1,57 @@
+<mat-list dense >
+<h1> Analysis </h1>
+  <mat-spinner *ngIf = 'isLoading'></mat-spinner>
+  <div style.visibility = "{{isLoading?'hidden':'visible'}}">
+    <div *ngIf="noRecord">
+      No records found.
+    </div>
+
+    <div *ngIf="!noRecord" >
+    <div class="chart-container" >
+    <div class="line-chart-container ">
+      <canvas #LineChart class="line-chart-canvas" style="height: 300px;"> </canvas>
+    </div>
+        <div class="line-chart-container">
+      <canvas #DoughnutChart class ="doughnut-chart-container" style="height:250px;white-space: nowrap"></canvas>
+      <p style="text-align: center;margin-top: 10px"> Total assets: {{total_assets}} HKD </p>
+        </div>
+    </div>
+
+
+  <br>
+    <div>
+  <h1> Recent Modified Records</h1>
+      <mat-divider></mat-divider>
+      <div  class ="list" *ngFor = "let record of recentRecordsList.slice()">
+        <mat-list-item >
+
+          <mat-icon mat-list-icon  svgIcon= {{record.icon}}></mat-icon>
+          <p mat-line class="list-header" >{{record.finAccount}}</p>
+          <span mat-line>{{record.description}}</span>
+          <span class="list_right">
+            {{record.displayDate}}
+          </span>
+          <span class="list_right">
+                        <p mat-line><span *ngIf="record.recordType=='expenditure'" class="expenditure">-$ {{record.amount.toString().substring(1)}}</span>
+                          <span *ngIf="record.recordType=='deposit'" class="deposit">+$ {{record.amount}}</span></p>
+            </span>
+          <span class="list_right_button">
+                            <button mat-icon-button (click) = "recordEdit(record.id)"> <mat-icon>edit</mat-icon> </button>
+        </span>
+          <span class="list_right_button">
+                            <button mat-icon-button (click) = "recordDelete(record.id)"> <mat-icon>delete</mat-icon> </button>
+        </span>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </div>
+    </div>
+
+    </div> <!--If no recored-->
+  </div>
+  <!-- div for testing-->
+<div>
+  <button (click)="assignColor()">Assign color</button>
+  <button (click)="showLabel()">Show/Disable label</button>
+  <input type="color">
+</div>
+</mat-list>

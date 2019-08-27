@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-spinner *ngIf= "isLoading"> </mat-spinner>
+  <form [formGroup]= "form" (submit)="onSavePost()"  *ngIf= "!isLoading">
+      <mat-form-field>
+          <input formControlName="title"
+                 matInput
+                 name="title"
+                 placeholder="Post name"
+                 type="text"
+          >
+          <mat-icon matSuffix>
+            <span class="valid-icon fadeIn animated" *ngIf="form.get('title').valid">sentiment_very_satisfied</span>
+            <span class="invalid-icon fadeIn animated" *ngIf="form.get('title').invalid">sentiment_very_dissatisfied</span>
+          </mat-icon>
+          <mat-error>
+                <div *ngIf="form.get('title').hasError('required')">This field is required</div>
+                <div *ngIf="form.get('title').hasError('minlength')"> You must input at least 3 characters </div>
+          </mat-error>
+          <mat-hint>Please input at least three character</mat-hint>
+          <mat-hint align="end" *ngIf="form.get('title').valid">OK!</mat-hint>
+      </mat-form-field>
+      <div>
+        <button type="button" mat-stroked-button (click)= "filePicker.click()">Pick image</button>
+        <input type="file" #filePicker (change)="onImagePicked($event)" accept="image/*">
+      </div>
+      <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+        <img [src]="imagePreview" [alt]= "form.value.title">
+      </div>
+      <mat-error>
+      <div *ngIf="form.get('image').hasError('invalidfile')">Upload file invalid </div>
+      </mat-error>
+      <mat-form-field>
+          <textarea formControlName="content"
+                    matInput
+                    name="content"
+                    placeholder="Post content">
+        </textarea>
+          <mat-icon matSuffix>
+              <span class="valid-icon fadeIn animated" *ngIf="form.get('content').valid">sentiment_very_satisfied</span>
+              <span class="invalid-icon fadeIn animated" *ngIf="form.get('content').invalid">sentiment_very_dissatisfied</span>
+            </mat-icon>
+          <mat-error>
+                <div *ngIf="form.get('content').hasError('required')">This field is required</div>
+          </mat-error>
+      </mat-form-field>
+      <button mat-raised-button type="submit" [disabled]="form.invalid">save post</button>
+      <br>
+      <button mat-raised-button type="button" (click)= "autoGeneratePost()"> Auto generate 10 posts</button>
+      <br>
+  </form>
+</mat-card>

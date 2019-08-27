@@ -1,0 +1,52 @@
+.spinner {
+  display: block;
+  align-content: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mat-raised-button{
+  background-color:rgba(211, 210, 210, 0.808);
+  height:40px;
+  width:30%;
+  display: inline-block;
+  align-content: center;
+  text-align: center;
+  padding:0;
+}
+
+
+.center {
+  margin: auto;
+  width: 400px;
+  padding: 10px;
+}
+
+p {
+  text-align: center;
+}
+
+div{
+  text-align: center;
+  align-content: center;
+}
+
+h1 {
+  padding:0px;
+  text-align: center;
+  margin: 0px;
+}
+
+mat-form-field {
+  width: 80%;
+}
+
+.mat-date-picker {
+  color:blue;
+}
+
+::ng-deep .mat-tab-label, ::ng-deep .mat-tab-label-active{
+  min-width: 0!important;
+}
+/*::ng-deep @media (orientation: landscape) .mat-datepicker-content-touch .mat-calendar {*/
+
+/*}*/

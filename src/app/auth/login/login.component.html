@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-spinner *ngIf= "isLoading"> </mat-spinner>
+  <span *ngIf= "!isLoading">
+    <h1>Login</h1>
+    <span *ngIf= "message !== ''">
+      <mat-card [ngStyle]="{'background-color':'rgb(251, 248, 204)'}">
+        <p class= "warning"> {{message}}.</p>
+      </mat-card>
+    </span>
+
+    <form (submit)="onLogin(loginForm)" #loginForm = "ngForm">
+        <mat-form-field>
+            <input matInput required name="loginName" ngModel placeholder="Login name" floatLabel="always" #loginNameInput= "ngModel" >
+            <mat-error>
+              <div *ngIf="loginNameInput.hasError('required')">This field is required</div>
+            </mat-error>
+        </mat-form-field>
+        <div>
+        <mat-form-field>
+          <input matInput type="password" required name="password" ngModel placeholder="Password"  floatLabel="always" #passwordInput= "ngModel">
+            <mat-error>
+                  <div *ngIf= "passwordInput.hasError('required')"> This field is required</div>
+            </mat-error>
+        </mat-form-field>
+        </div>
+      <p>Didn't have an account yet? <a routerLink="/signup">Sign Up</a> </p>
+      <p><a routerLink="/forgot-password">Forgot Password?</a> </p>
+        <button mat-raised-button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </span>
+</mat-card>
+

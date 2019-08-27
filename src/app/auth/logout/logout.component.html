@@ -1,0 +1,16 @@
+
+ <h1>Logout</h1>
+  <hr>
+<span *ngIf= !autologout >
+  <p>Hey! {{profile?.displayName}} </p>
+  <p>Do you sure to logout?</p>
+  <button mat-raised-button style="margin-left: 10px" (click)="logOut()" mat-dialog-close>Logout</button>
+  <button mat-raised-button style="float:right; margin-right: 10px" mat-dialog-close>Back</button>
+</span>
+
+<span *ngIf= autologout>
+  <p> You will automatically logout in <b>{{count}}</b> seconds</p>
+  <button mat-raised-button style="margin-left: 15%" (click)="logOut()" mat-dialog-close>Logout</button>
+  <button mat-raised-button style="float:right; margin-right: 15%"mat-dialog-close>Continue</button>
+
+</span>
