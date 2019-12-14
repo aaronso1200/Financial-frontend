@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   backendURL: 'http://localhost:3000',
-  cookiesSecure: false
-}
+  cookiesSecure: false};
+
 /*
 };
  * For easier debugging in development mode, you can import the following file
