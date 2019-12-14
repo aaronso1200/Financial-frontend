@@ -26,6 +26,8 @@
 
       <a mat-button routerLink= "/finManage/manageAccount" (click) ="sidenav.close()" style="color:black"> Add Account</a>
       <a mat-button routerLink= "/finManage/manageRecord" (click) ="sidenav.close()" style="color:black" > Add record </a>
+      <a mat-button routerLink= "/finManage/manageBankStatementAdd" (click) ="sidenav.close()" style="color:black" > Upload Bank Statement </a>
+      <a mat-button routerLink= "/finManage/manageBankStatementViewPdf" (click) ="sidenav.close()" style="color:black" > View Bank Statement </a>
       <a mat-button routerLink="/finManage/recordByAccount" (click)="sidenav.close()" style="color:black"> Account records</a>
       <a mat-button routerLink= "/finManage/information" (click) ="sidenav.close()" style="color:black" > Analysis</a>
 
@@ -35,7 +37,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-<mat-toolbar>
+<mat-toolbar class = "app-toolbar">
   <span class="left">
   <button mat-icon-button #listbutton (click)="sidenav.open()"><mat-icon>list</mat-icon></button>
   </span>
@@ -50,6 +52,7 @@
   </span>
   </ul>
 </mat-toolbar>
+
 
 <main>
 <router-outlet> </router-outlet>

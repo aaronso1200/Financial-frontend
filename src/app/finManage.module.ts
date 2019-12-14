@@ -14,16 +14,20 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import { FinChartMainComponent } from './finManage/chart-main/chart-main.component';
 import {FinManageRecordByAccountComponent} from './finManage/manage-Record/record-by-Account/record-by-account.component';
+import {ManageBankStatementAddComponent} from "./finManage/manageBankStatement/manage-BankStatement-Add/manage-BankStatement-add.component";
+import {PdfViewerModule} from "ng2-pdf-viewer";
+import { ManageBankStatementViewPdfComponent } from './finManage/manageBankStatement/manage-bank-statement-view-pdf/manage-bank-statement-view-pdf.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    AngularMaterialModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FormsModule,
-    FinManageRoutingModule,
-  ],
+    imports: [
+        CommonModule,
+        AngularMaterialModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        FinManageRoutingModule,
+        PdfViewerModule,
+    ],
     declarations:[
       FinManageListComponent,
       FinManageEditComponent,
@@ -32,7 +36,9 @@ import {FinManageRecordByAccountComponent} from './finManage/manage-Record/recor
       ManageRecordEditComponent,
       ManageRecordDeleteComponent,
       FinChartMainComponent,
-      FinManageRecordByAccountComponent
+      FinManageRecordByAccountComponent,
+      ManageBankStatementAddComponent,
+      ManageBankStatementViewPdfComponent
     ],
   entryComponents:[ FinManageEditComponent, FinManageDeleteComponent, ManageRecordEditComponent,ManageRecordDeleteComponent]
 

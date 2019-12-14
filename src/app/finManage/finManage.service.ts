@@ -175,6 +175,16 @@ export class FinManageService {
       });
     }
 
-
+uploadBankStatement(statement: File,finAccountId,year,month) {
+console.log(statement);
+  const postData = new FormData();
+  postData.append('bankStatement',statement,"bankStatement");
+  postData.append('finAccountId',finAccountId);
+  postData.append('year',year);
+  postData.append('month',month);
+  this.http.post(BACKEND_URL + '/updateRecordByPdf', postData).subscribe((responseData)=> {
+    console.log(responseData);
+  });
+}
 
 }
