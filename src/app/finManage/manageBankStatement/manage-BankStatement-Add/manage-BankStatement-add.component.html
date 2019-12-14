@@ -1,0 +1,42 @@
+<mat-list dense >
+    <h1> Upload Bank Statement </h1>
+    <br>
+        <form [formGroup]= "form" (submit)="onSave()" >
+            <div class="head">
+            <input hidden="true"   id="input-file-id" (change)="OnStatementPick($event)" multiple type="file" />
+            <label for="input-file-id" class="mat-raised-button">Choose Files</label>
+            <span class= "space"></span>
+                <mat-form-field>
+                    <mat-label>Account</mat-label>
+                <mat-select formControlName="account" required>
+                    <mat-option *ngFor="let account of accountList"  [value]="account.id" >
+                        {{account.name}}
+                    </mat-option>
+                </mat-select>
+                    <mat-error>
+                        <div *ngIf="form.get('account').hasError('required')">Required</div>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Month</mat-label>
+                    <mat-select formControlName ="month" [value]="currentDate.getMonth()+1" required>
+                        <mat-option *ngFor="let month of months"  [value]=month >
+                            {{month}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Year</mat-label>
+                    <mat-select formControlName ="year"  required>
+                        <mat-option *ngFor="let year of years"  [value]=year >
+                            {{year}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            <button mat-raised-button type="submit" >Upload File</button>
+            </div>
+        </form>
+    <mat-divider></mat-divider>
+    <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display:block"></pdf-viewer>
+    <br>
+</mat-list>
