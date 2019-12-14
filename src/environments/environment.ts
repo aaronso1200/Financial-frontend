@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  backendURL: 'http://backend-dev22.us-west-2.elasticbeanstalk.com',
+  backendURL: 'http://localhost:3000',
   cookiesSecure: false
-
+}
 /*
 };
  * For easier debugging in development mode, you can import the following file

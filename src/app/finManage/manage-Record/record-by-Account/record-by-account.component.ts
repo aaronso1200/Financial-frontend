@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {FinManageService} from '../../finManage.service';
-import {takeUntil} from 'rxjs/operators';
+import {take, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
@@ -39,6 +39,17 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
         this.accountList = result ;
         this.isLoading=false;
       });
+    this.finManageService.getRecords().pipe(takeUntil(this.unsubscribe)).subscribe( (getrecords: any[]) => {
+
+      this.recordsList = getrecords;
+      this.isLoading=false;
+      // console.log(this.recordsList);
+       console.log(this.recordsList);
+    })
+    this.finManageService.getRecordsCount().pipe(takeUntil(this.unsubscribe)).subscribe((count: number) => {
+      this.totalRecords = count;
+    })
+
   }
 
   recordEdit(id){
@@ -53,7 +64,7 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
       autoFocus: false,
     }).afterClosed().subscribe( result => {
       if (result) {
-        this.getRecordFromServer(this.data);
+        this.finManageService.getAccountRecordByAccount(this.data)
       }
     });
   }
@@ -66,11 +77,11 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
       minWidth: '450px',
       hasBackdrop: true,
       panelClass: 'my-panel',
-      data: {record: result, date:this.date},
+      data: {record: result},
       autoFocus: false,
     }).afterClosed().subscribe( result => {
       if (result) {
-        this.getRecordFromServer(this.data);
+        this.finManageService.getAccountRecordByAccount(this.data)
       }
     });
   }
@@ -80,28 +91,29 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
     // console.log(event.value);
     this.data = {account: event.value, pageSize: this.postsPerPage,page: this.currentPage};
     // console.log(data);
-    this.getRecordFromServer(this.data);
+    // this.getRecordFromServer(this.data);
+    this.finManageService.getAccountRecordByAccount(this.data);
   }
 
- getRecordFromServer(data) {
-    this.http.post(BACKEND_URL + '/getRecordByAccount', data).subscribe((result:any)=> {
-      this.isLoading = false;
-      console.log(result);
-      this.recordsList = result.result;
-      this.totalRecords = result.counts.counts;
-      for (let i=0; i<this.recordsList.length;i++) {
-        let date = new Date(this.recordsList[i].recordDate);
-        this.recordsList[i].displayDate = date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear();
-      }
-    })
-  }
+ // getRecordFromServer(data) {
+ //    this.http.post(BACKEND_URL + '/getRecordByAccount', data).subscribe((result:any)=> {
+ //      this.isLoading = false;
+ //      console.log(result);
+ //      this.recordsList = result.result;
+ //      this.totalRecords = result.counts.counts;
+ //      for (let i=0; i<this.recordsList.length;i++) {
+ //        let date = new Date(this.recordsList[i].recordDate);
+ //        this.recordsList[i].displayDate = date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear();
+ //      }
+ //    })
+ //  }
 
   onChangedPage(pageData: PageEvent) {
     this.isLoading = true;
     this.currentPage = pageData.pageIndex + 1;
     this.postsPerPage = pageData.pageSize;
     this.data = {account: this.data.account, pageSize:this.postsPerPage, page: this.currentPage};
-    this.getRecordFromServer(this.data);
+    this.finManageService.getAccountRecordByAccount(this.data)
   }
 
   ngOnDestroy() {

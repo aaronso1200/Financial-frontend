@@ -23,6 +23,7 @@ export class FinManageService {
   private recordList : any[] = [];
   private recordUpdated = new Subject();
   private accountSumData = new Subject();
+  private recordsCountUpdated = new Subject();
 
   constructor(private http: HttpClient, private router: Router,private commonService: CommonService ) {
 
@@ -36,9 +37,15 @@ export class FinManageService {
     return this.recordUpdated.asObservable();
   }
 
+  getRecordsCount() {
+    return this.recordsCountUpdated.asObservable();
+  }
+
   getAccountSumData() {
     return this.accountSumData.asObservable();
   }
+
+
 
   accountOnCreate(name, description) {
      const createData = {name: name, description: description,icon: "default_account"};
@@ -117,25 +124,49 @@ export class FinManageService {
       // console.log('Accounts record: ' + accountRecord);
       return {
        records: accountRecord.records.map((records) => {
-         return {
-           id: records._id,
-           description: records.description,
-           amount: records.amount,
-           recordType: records.recordType,
-           finAccount: records.finAccountId.name,
-           finAccountId: records.finAccountId._id,
-           icon: records.finAccountId.icon? records.finAccountId.icon : "default_account"
-         }
+          return FinManageService.buildRecordObject(records);
        })
       }
     }))
       .subscribe(result => {
       this.recordList = result.records;
       this.recordUpdated.next([...this.recordList]);
-      return result.records;
     });
   }
 
+  getAccountRecordByAccount(account) {
+    this.http.post<{counts:any;records:any}>(BACKEND_URL + '/record/getRecordByAccount', account).pipe(map((accountRecord) => {
+      //console.log('Accounts record: ' + accountRecord);
+      return {
+        records: accountRecord.records.map((records) => {
+          return FinManageService.buildRecordObject(records);
+        }),
+        totalRecords:  accountRecord.counts.counts
+      }
+    })).subscribe((result:any)=> {
+      this.recordList = result.records;
+      this.recordUpdated.next([...this.recordList]);
+      // console.log(result.totalRecords);
+      this.recordsCountUpdated.next(result.totalRecords);
+    })
+  }
+
+  static buildRecordObject (records:any) {
+    console.log(records);
+    let date = new Date(records.recordDate);
+    return {
+      id: records._id,
+      description: records.description,
+      amount: records.amount,
+      recordType: records.recordType,
+      finAccount: records.finAccount,
+      finAccountId: records.finAccountId,
+      icon: records.icon? records.icon : "default_account",
+      tags: records.tags,
+      displayDate: records.recordDate? date.getDate() + '-' + (date.getMonth()+1) + '-' + date.getFullYear() : "",
+      recordDate: records.recordDate
+    }
+  }
 
   getAccountSum() {
     this.http.post(BACKEND_URL + '/record/AllAccountsum',{}).subscribe(result => {

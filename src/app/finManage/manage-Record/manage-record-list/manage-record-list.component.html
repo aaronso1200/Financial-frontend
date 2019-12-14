@@ -27,6 +27,7 @@
           <mat-icon mat-list-icon  svgIcon= {{record.icon}}></mat-icon>
           <p mat-line class="list-header">{{record.finAccount}}</p>
           <span mat-line>{{record.description}}</span>
+            <span> {{record.tags}}</span>
           <span class="list_right">
                       <p mat-line><span *ngIf="record.recordType=='expenditure'" class="expenditure">-$ {{record.amount.toString().substring(1)}}</span>
                         <span *ngIf="record.recordType=='deposit'" class="deposit">+$ {{record.amount}}</span></p>

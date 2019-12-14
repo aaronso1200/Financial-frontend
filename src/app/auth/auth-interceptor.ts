@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     let authToken;
     authToken = this.authService.getToken();
-    console.log(authToken);
+    // console.log(authToken);
     const authRequest = req.clone({
       // The set method add header to the request if the header is not existed, overwrite if the header exist.
       headers: req.headers.set('Authorization', 'Bearer ' + authToken),
