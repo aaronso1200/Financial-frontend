@@ -10,7 +10,8 @@ import {ChangePasswordComponent} from './profile/change-password/change-password
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
-
+import{LoadingSpinnerComponent} from "./common/loading-spinner-component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
   constructor(public authService: AuthService, private dialog: MatDialog,
               iconRegistry: MatIconRegistry,
               sanitizer: DomSanitizer,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private router:Router) {
     this.http.get('./assets/icon/icon.json').subscribe((result:any)=> {
       for (let i =0; i<result.length;i++) {
         iconRegistry.addSvgIcon(result[i].name, sanitizer.bypassSecurityTrustResourceUrl('assets/icon/'+result[i].name+'.svg'));
@@ -48,8 +50,12 @@ export class AppComponent implements OnInit {
     this.profileSub = this.authService.getProfileListener().subscribe( (profile:any)=> {
       this.profile = profile
     });
-  }
 
+  }
+  closedAndLog() {
+    console.log('form app');
+    this.sidenav.close();
+  }
   ngOnInit() {
     this.authListener = this.authService.getAuthTokenListener().subscribe(
       isAuthenticated => {

@@ -19,7 +19,7 @@
 
     <mat-divider></mat-divider>
 
-    <div class= "spinner"><mat-spinner *ngIf = 'isLoading'></mat-spinner></div>
+    <loading-spinner [isLoading]="isLoading"></loading-spinner>
 
     <div *ngIf = '!isLoading'>
       <div class ="list" *ngFor = "let record of recordsList.slice().reverse()" >

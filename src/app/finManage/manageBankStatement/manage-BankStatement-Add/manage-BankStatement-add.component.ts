@@ -20,23 +20,22 @@ export class ManageBankStatementAddComponent implements OnInit,OnDestroy {
   private unsubscribe: Subject<boolean> = new Subject();
   accountList: any[] =[];
   private months;
- private years;
-private currentDate = new Date();
+  private years;
+  private currentDate = new Date();
+  private isLoading: Boolean;
 
   constructor(private http: HttpClient,private finManageService: FinManageService  ) {
     this.months = Array(12).fill(1).map((x,i)=>x+i);
     this.years =  Array(50).fill(2000).map((x,i)=>x+i);
-    console.log('year' + this.years);
   }
 
   ngOnInit() {
-    this.finManageService.getAccountLists();
-    this.finManageService.getListUpdateListener().pipe(takeUntil(this.unsubscribe)).subscribe(
-        (result: []) => {
-          console.log('called');
-          console.log(result);
-          this.accountList = result;
-        });
+    this.isLoading=false;
+    // this.finManageService.getAccountLists();
+    // this.finManageService.getListUpdateListener().pipe(takeUntil(this.unsubscribe)).subscribe(
+    //     (result: []) => {
+    //       this.accountList = result;
+    //     });
     this.form = new FormGroup({
       'bank_statement': new FormControl(null, {
         validators: [Validators.required],
@@ -51,7 +50,7 @@ private currentDate = new Date();
       'account': new FormControl(null, {
         validators: [Validators.required]
       })
-    })
+    });
     this.form.patchValue({year: this.currentDate.getFullYear(),month: this.currentDate.getMonth()+1});
     this.form.get('year').updateValueAndValidity();
     this.form.get('month').updateValueAndValidity();
@@ -61,6 +60,7 @@ private currentDate = new Date();
 
 
   OnStatementPick(event: Event) {
+    this.isLoading = true;
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({bank_statement: file}); // file is an object, reactive form not limited to store text
     this.form.get('bank_statement').updateValueAndValidity();
@@ -72,19 +72,29 @@ private currentDate = new Date();
       };
 
       reader.readAsArrayBuffer(file);
+      this.isLoading = false;
     }
   }
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
+
+  markAllAsTouched() {
+    for(let i in this.form.controls)
+      this.form.controls[i].markAsTouched();
+  }
+
+
   onSave() {
    if (this.form.invalid) {
       if (this.form.get('bank_statement').hasError('invalidfile')) {
        alert("Please upload File and make sure it is a pdf");
      }
+     this.markAllAsTouched();
      return false
    }
+   this.isLoading = true;
     this.finManageService.uploadBankStatement(this.form.value.bank_statement,this.form.value.account,this.form.value.year,this.form.value.month);
   }
 }

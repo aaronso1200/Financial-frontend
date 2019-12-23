@@ -73,10 +73,9 @@ export class FinManageService {
 
   recordOnDelete(id) {
     const data= {id:id};
-    this.http.post(BACKEND_URL + '/record/delete',data).subscribe((responseData) => {
-
-    })
+    return this.http.post(BACKEND_URL + '/record/delete',data)
   }
+
   accountOnUpdate(id, name, description) {
     const editData = {id: id, name: name, description: description};
     this.http.put(BACKEND_URL + '/edit', editData).subscribe( (response) => {
@@ -144,6 +143,7 @@ export class FinManageService {
         totalRecords:  accountRecord.counts.counts
       }
     })).subscribe((result:any)=> {
+      console.log(result.message);
       this.recordList = result.records;
       this.recordUpdated.next([...this.recordList]);
       // console.log(result.totalRecords);
@@ -206,7 +206,7 @@ export class FinManageService {
       });
     }
 
-uploadBankStatement(statement: File,finAccountId,year,month) {
+uploadBankStatement(statement:File,finAccountId:string,year:string,month:string) {
 console.log(statement);
   const postData = new FormData();
   postData.append('bankStatement',statement,"bankStatement");
@@ -215,7 +215,14 @@ console.log(statement);
   postData.append('month',month);
   this.http.post(BACKEND_URL + '/updateRecordByPdf', postData).subscribe((responseData)=> {
     console.log(responseData);
+    this.commonService.opensnackbar('Upload file successful')
+    return
   });
+}
+
+getBankStatement(year:string, month:string,finAccountId:number) {
+  let data = {year: year,month: month,finAccountId: finAccountId};
+    return this.http.post<{file:any,fileName:string}>(BACKEND_URL + '/downloadfile',data)
 }
 
 }

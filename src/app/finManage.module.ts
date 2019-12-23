@@ -17,16 +17,17 @@ import {FinManageRecordByAccountComponent} from './finManage/manage-Record/recor
 import {ManageBankStatementAddComponent} from "./finManage/manageBankStatement/manage-BankStatement-Add/manage-BankStatement-add.component";
 import {PdfViewerModule} from "ng2-pdf-viewer";
 import { ManageBankStatementViewPdfComponent } from './finManage/manageBankStatement/manage-bank-statement-view-pdf/manage-bank-statement-view-pdf.component';
+import {ShareModule} from "./share.module";
+import { FormFinAccountSelectorComponent } from './form/form-fin-account-selector/form-fin-account-selector.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        AngularMaterialModule,
         RouterModule,
         ReactiveFormsModule,
         FormsModule,
         FinManageRoutingModule,
         PdfViewerModule,
+        ShareModule,
     ],
     declarations:[
       FinManageListComponent,
@@ -38,7 +39,8 @@ import { ManageBankStatementViewPdfComponent } from './finManage/manageBankState
       FinChartMainComponent,
       FinManageRecordByAccountComponent,
       ManageBankStatementAddComponent,
-      ManageBankStatementViewPdfComponent
+      ManageBankStatementViewPdfComponent,
+      FormFinAccountSelectorComponent
     ],
   entryComponents:[ FinManageEditComponent, FinManageDeleteComponent, ManageRecordEditComponent,ManageRecordDeleteComponent]
 

@@ -34,6 +34,7 @@
     "cookie-parser": "^1.4.4",
     "core-js": "^2.5.4",
     "express-session": "^1.16.2",
+    "file-saver": "^2.0.2",
     "googleapis": "^27.0.0",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",

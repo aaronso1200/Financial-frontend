@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {AuthService} from '../auth.service';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import {passwordValidator, samePasswordValidator, emailValidator, loginNameValidator} from '../../form-Validators/sync.validator';
+import {passwordValidator, samePasswordValidator, emailValidator, loginNameValidator} from '../../form/form-Validators/sync.validator';
 import {TooltipPosition} from '@angular/material/tooltip';
 import { Subscription, Observable, timer } from 'rxjs';
 import {AbstractControl} from '@angular/forms';

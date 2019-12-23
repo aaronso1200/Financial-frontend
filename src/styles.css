@@ -10,3 +10,10 @@ body { margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; }
  .mat-content > mat-panel-title, .mat-content > mat-panel-description {
   flex: 0 0 auto;
 }
+
+.spinner {
+ display: block;
+ align-content: auto;
+ margin-left: auto;
+ margin-right: auto;
+}

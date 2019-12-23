@@ -7,6 +7,8 @@ import {environment} from '../../../../environments/environment';
 import {ManageRecordEditComponent} from '../manage-record-edit/manage-record-edit.component';
 import {ManageRecordDeleteComponent} from '../manage-record-delete/manage-record-delete.component';
 import {MatDialog, PageEvent} from '@angular/material';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {mimeType} from "../../manageBankStatement/manage-BankStatement-Add/pdf.validator";
 
 const BACKEND_URL = environment.backendURL + '/finManage/record';
 
@@ -17,6 +19,7 @@ const BACKEND_URL = environment.backendURL + '/finManage/record';
 })
 
 export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
+  form: FormGroup;
   recordsList: any[] = [];
   date : any;
   isLoading =false;
@@ -32,19 +35,21 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.isLoading=true;
-    this.finManageService.getAccountLists();
-    this.finManageService.getListUpdateListener().pipe(takeUntil(this.unsubscribe)).subscribe(
-      (result: []) => {
-        this.accountList = result ;
-        this.isLoading=false;
-      });
+    this.isLoading=false;
+
+    this.form = new FormGroup({
+      'account': new FormControl(null, {
+        validators: [Validators.required]
+      })
+    });
+
+    this.form.valueChanges.subscribe(()=>{this.submitFilter()});
     this.finManageService.getRecords().pipe(takeUntil(this.unsubscribe)).subscribe( (getrecords: any[]) => {
 
       this.recordsList = getrecords;
       this.isLoading=false;
       // console.log(this.recordsList);
-       console.log(this.recordsList);
+      //  console.log(this.recordsList);
     })
     this.finManageService.getRecordsCount().pipe(takeUntil(this.unsubscribe)).subscribe((count: number) => {
       this.totalRecords = count;
@@ -86,10 +91,10 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
     });
   }
 
-  submitFilter(event){
+  submitFilter(){
     this.isLoading=true;
     // console.log(event.value);
-    this.data = {account: event.value, pageSize: this.postsPerPage,page: this.currentPage};
+    this.data = {account: this.form.get('account').value, pageSize: this.postsPerPage,page: this.currentPage};
     // console.log(data);
     // this.getRecordFromServer(this.data);
     this.finManageService.getAccountRecordByAccount(this.data);

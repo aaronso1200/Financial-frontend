@@ -1,3 +1,45 @@
-<p>
-  manage-bank-statement-view-pdf works!
-</p>
+<mat-list dense >
+  <h1> View Bank Statement </h1>
+  <br>
+    <div class="head">
+  <form [formGroup]= "form" (submit)="onSave()" >
+     <form-fin-account-selector [formControlName]="'finAccountId'" [parentForm]="form"></form-fin-account-selector>
+      <mat-form-field>
+        <mat-label>Month</mat-label>
+        <mat-select  formControlName ="month" [value]="currentDate.getMonth()+1" required>
+          <mat-option *ngFor="let month of months"  [value]=month >
+            {{month}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Year</mat-label>
+        <mat-select formControlName ="year"  required>
+          <mat-option *ngFor="let year of years"  [value]=year >
+            {{year}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </form>
+        <span class="space"></span>
+        <button mat-raised-button [disabled]="!isAllowDownload" (click)="downloadFile()" >Download</button>
+    </div>
+  <mat-divider></mat-divider>
+  <!--<div *ngIf = 'isLoading' class= "spinner"><mat-spinner ></mat-spinner>-->
+    <!--<div style="position:relative; top: -60px; left: 20px;"> Loading </div>-->
+  <!--</div>-->
+  <loading-spinner [isLoading]="isLoading"></loading-spinner>
+  <div *ngIf="!isLoading">
+    <div *ngIf="fileNotfound">
+      <p> No records.</p>
+    </div>
+    <div *ngIf="!fileNotfound ">
+      <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display:block"></pdf-viewer>
+    </div>
+
+  </div>
+
+
+  <br>
+</mat-list>
+

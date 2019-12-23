@@ -1,24 +1,30 @@
 <mat-list dense >
   <h1> Account Records </h1>
   <div class="head">
-    <form  #filterForm="ngForm">
-    <mat-form-field>
-      <mat-label>Account</mat-label>
-      <mat-select  required (selectionChange)="submitFilter($event)">
-        <mat-option *ngFor="let account of accountList"  [value]="account.id" >
-          {{account.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-icon-button ><mat-icon>keyboard_arrow_up</mat-icon></button>
-    <button mat-icon-button><mat-icon>keyboard_arrow_down</mat-icon></button>
+    <!--<form  #filterForm="ngForm">-->
+    <!--<mat-form-field>-->
+      <!--<mat-label>Account</mat-label>-->
+      <!--<mat-select  required (selectionChange)="submitFilter($event)">-->
+        <!--<mat-option *ngFor="let account of accountList"  [value]="account.id" >-->
+          <!--{{account.name}}-->
+        <!--</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+    <!--<button mat-icon-button ><mat-icon>keyboard_arrow_up</mat-icon></button>-->
+    <!--<button mat-icon-button><mat-icon>keyboard_arrow_down</mat-icon></button>-->
+    <!--</form>-->
+    <form  [formGroup]="form">
+      <form-fin-account-selector [parentForm]="form" [formControlName]="'account'"></form-fin-account-selector>
+      <button mat-icon-button ><mat-icon>keyboard_arrow_up</mat-icon></button>
+      <button mat-icon-button><mat-icon>keyboard_arrow_down</mat-icon></button>
     </form>
+
       <span class= "space"></span>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div class= "spinner"><mat-spinner *ngIf = 'isLoading'></mat-spinner></div>
+  <loading-spinner [isLoading]="isLoading"></loading-spinner>
 
   <div *ngIf = '!isLoading'>
     <div class ="list" *ngFor = "let record of recordsList.slice()" >

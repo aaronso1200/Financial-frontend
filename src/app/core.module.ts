@@ -5,19 +5,21 @@ import {AuthInterceptor} from './auth/auth-interceptor';
 
 import {AngularMaterialModule} from './angular-material.module';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import {LoadingSpinnerComponent} from "./common/loading-spinner-component";
 
 @NgModule({
   declarations: [
-
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     AngularMaterialModule,
+
   ],
   exports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+
   ],
 })
 export class CoreModule {

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {loginNameValidator} from '../../form-Validators/sync.validator';
+import {loginNameValidator} from '../../form/form-Validators/sync.validator';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {CommonService} from '../../common/common.service';
 import {PasswordBarComponent} from '../../password-bar/password-bar.component';
-import {passwordValidator,samePasswordValidator} from '../../form-Validators/sync.validator';
+import {passwordValidator,samePasswordValidator} from '../../form/form-Validators/sync.validator';
 
 const BACKEND_URL = environment.backendURL;
 @Component({

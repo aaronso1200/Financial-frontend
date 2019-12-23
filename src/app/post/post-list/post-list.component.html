@@ -1,4 +1,4 @@
-<div class= "spinner"><mat-spinner *ngIf = 'isLoading'></mat-spinner></div>
+<loading-spinner [isLoading]="isLoading"></loading-spinner>
 <mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
     <h1> Posts</h1>
   <span >

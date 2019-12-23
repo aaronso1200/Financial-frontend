@@ -6,17 +6,7 @@
             <input hidden="true"   id="input-file-id" (change)="OnStatementPick($event)" multiple type="file" />
             <label for="input-file-id" class="mat-raised-button">Choose Files</label>
             <span class= "space"></span>
-                <mat-form-field>
-                    <mat-label>Account</mat-label>
-                <mat-select formControlName="account" required>
-                    <mat-option *ngFor="let account of accountList"  [value]="account.id" >
-                        {{account.name}}
-                    </mat-option>
-                </mat-select>
-                    <mat-error>
-                        <div *ngIf="form.get('account').hasError('required')">Required</div>
-                    </mat-error>
-                </mat-form-field>
+                <form-fin-account-selector [parentForm]="form" [formControlName]="'account'"></form-fin-account-selector>
                 <mat-form-field>
                     <mat-label>Month</mat-label>
                     <mat-select formControlName ="month" [value]="currentDate.getMonth()+1" required>
@@ -37,6 +27,9 @@
             </div>
         </form>
     <mat-divider></mat-divider>
-    <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display:block"></pdf-viewer>
+    <loading-spinner [isLoading]="isLoading"></loading-spinner>
+    <div *ngIf="!isLoading">
+        <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display:block"></pdf-viewer>
+    </div>
     <br>
 </mat-list>

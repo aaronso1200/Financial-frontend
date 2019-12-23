@@ -30,7 +30,7 @@ import {DynamicComponentHostDirective} from './finManage/dynamic-component-host.
 import {HttpErrorsHandler} from './httpErrorsHandler';
 
 import {SnackBarComponent} from './common/snack-bar.component';
-
+import {LoadingSpinnerComponent} from "./common/loading-spinner-component";
 
 import {DomSanitizer} from '@angular/platform-browser';
 import { IconListComponent } from './icon-list/icon-list.component';
@@ -38,7 +38,8 @@ import { ManageRecordShowRecordItemComponent } from './finManage/manage-Record/m
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { PasswordBarComponent } from './password-bar/password-bar.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-
+import {CommonModule} from "@angular/common";
+import {ShareModule} from "./share.module";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    ShareModule
   ],
   entryComponents: [LogOutComponent, ShowErrorComponent, SnackBarComponent,IconListComponent, ChangePasswordComponent,],
   providers: [

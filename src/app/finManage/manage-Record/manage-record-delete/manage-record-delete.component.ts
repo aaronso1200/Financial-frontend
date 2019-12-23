@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {FinManageService} from '../../finManage.service';
+import {CommonService} from "../../../common/common.service";
 
 @Component({
   selector: 'app-finRecordDelete',
@@ -11,6 +12,7 @@ export class ManageRecordDeleteComponent implements OnDestroy, OnInit {
   isLoading = true;
   record:any;
   constructor(private finManage: FinManageService,
+              private commonService: CommonService,
               private dialogRef: MatDialogRef<FinManageService>,
               @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -24,7 +26,10 @@ export class ManageRecordDeleteComponent implements OnDestroy, OnInit {
 
   }
   delete(id) {
-    this.finManage.recordOnDelete(id);
-    this.dialogRef.close({date:this.data.date});
+    this.finManage.recordOnDelete(id).subscribe((response) => {
+      this.commonService.opensnackbar('Delete record successful');
+      this.dialogRef.close({date:this.data.date});
+    });
+
   }
 }
