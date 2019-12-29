@@ -2,7 +2,7 @@
   <h1> View Bank Statement </h1>
   <br>
     <div class="head">
-  <form [formGroup]= "form" (submit)="onSave()" >
+  <form [formGroup]= "form"  >
      <form-fin-account-selector [formControlName]="'finAccountId'" [parentForm]="form"></form-fin-account-selector>
       <mat-form-field>
         <mat-label>Month</mat-label>

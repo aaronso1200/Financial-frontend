@@ -12,7 +12,7 @@ import {Subject} from "rxjs";
 
 export class FormFinAccountSelectorComponent implements OnInit {
   @Input() parentForm:FormGroup;
-  @Input() formControlName : String;
+  @Input() formControlName;
   accountList: any[] =[];
   private unsubscribe: Subject<boolean> = new Subject();
 

@@ -22,14 +22,14 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
   private pdfSrc:Uint8Array;
   private unsubscribe: Subject<boolean> = new Subject();
   accountList: any[] =[];
-  private months;
-  private years;
-  private currentDate = new Date();
+   months;
+   years;
+   currentDate = new Date();
   private file: Blob;
   private fileName: string;
   private fileNotfound: boolean = true;
-  private isLoading: boolean = true;
-  private isAllowDownload: boolean = false;
+  isLoading: boolean = true;
+   isAllowDownload: boolean = false;
 
   constructor(private http: HttpClient,private finManageService: FinManageService  ) {
     this.months = Array(12).fill(1).map((x,i)=>x+i);

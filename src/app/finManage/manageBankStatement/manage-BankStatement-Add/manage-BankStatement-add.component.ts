@@ -19,10 +19,10 @@ export class ManageBankStatementAddComponent implements OnInit,OnDestroy {
   pdfSrc = "";
   private unsubscribe: Subject<boolean> = new Subject();
   accountList: any[] =[];
-  private months;
-  private years;
-  private currentDate = new Date();
-  private isLoading: Boolean;
+  months;
+   years;
+   currentDate = new Date();
+   isLoading: Boolean;
 
   constructor(private http: HttpClient,private finManageService: FinManageService  ) {
     this.months = Array(12).fill(1).map((x,i)=>x+i);

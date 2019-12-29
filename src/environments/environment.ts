@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendURL: 'http://localhost:3000',
+  backendURL: 'http://FinBackendDocker-env.yhnxztzf6p.us-east-1.elasticbeanstalk.com',
   cookiesSecure: false};
 
 /*

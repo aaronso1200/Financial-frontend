@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.13.0",
     "@angular/animations": "~7.1.0",
     "@angular/cdk": "~7.2.0",
     "@angular/common": "~7.1.0",
@@ -22,7 +23,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
-    "angular": "^1.7.6",
+    "angular": "^1.7.9",
     "angular-cookies": "^1.7.7",
     "aws-sdk": "^2.498.0",
     "bcryptjs": "^2.4.3",
@@ -53,7 +54,6 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/cli": "^7.3.9",
     "@angular/compiler-cli": "^7.2.15",
     "@angular/language-service": "~7.1.0",
@@ -68,6 +68,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "node-sass": "^4.13.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
