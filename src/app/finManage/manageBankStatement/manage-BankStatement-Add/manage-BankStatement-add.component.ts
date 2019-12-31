@@ -95,6 +95,12 @@ export class ManageBankStatementAddComponent implements OnInit,OnDestroy {
      return false
    }
    this.isLoading = true;
-    this.finManageService.uploadBankStatement(this.form.value.bank_statement,this.form.value.account,this.form.value.year,this.form.value.month);
+    this.finManageService.uploadBankStatement(this.form.value.bank_statement,this.form.value.account,this.form.value.year,this.form.value.month)
+        .then(() =>{
+      this.isLoading=false;
+    });
+    this.pdfSrc='';
+    this.form.patchValue({bank_statement: ''});
+    this.form.get('bank_statement').updateValueAndValidity();
   }
 }

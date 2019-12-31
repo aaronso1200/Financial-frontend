@@ -23,6 +23,7 @@
   </form>
         <span class="space"></span>
         <button mat-raised-button [disabled]="!isAllowDownload" (click)="downloadFile()" >Download</button>
+      <button mat-raised-button [disabled]="!isAllowDownload" (click)="deleteBankStatement()" >Delete</button>
     </div>
   <mat-divider></mat-divider>
   <!--<div *ngIf = 'isLoading' class= "spinner"><mat-spinner ></mat-spinner>-->

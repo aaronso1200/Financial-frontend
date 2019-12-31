@@ -213,16 +213,28 @@ console.log(statement);
   postData.append('finAccountId',finAccountId);
   postData.append('year',year);
   postData.append('month',month);
-  this.http.post(BACKEND_URL + '/updateRecordByPdf', postData).subscribe((responseData)=> {
-    console.log(responseData);
-    this.commonService.opensnackbar('Upload file successful')
-    return
+  return new Promise((resolve,reject) => {
+    this.http.post(BACKEND_URL + '/uploadBankStatement', postData).subscribe((responseData)=> {
+    this.commonService.opensnackbar('Upload file successful');
+    resolve('Upload Successful')
   });
+
+  });
+}
+
+deleteBankStatement(fileId:string) {
+  return new Promise((resolve,reject) => {
+    this.http.post(BACKEND_URL + '/deleteBankStatement', {id:fileId}).subscribe((responseData)=> {
+      this.commonService.opensnackbar('Delete successful');
+      resolve('Delete Successful');
+    })
+  });
+
 }
 
 getBankStatement(year:string, month:string,finAccountId:number) {
   let data = {year: year,month: month,finAccountId: finAccountId};
-    return this.http.post<{file:any,fileName:string}>(BACKEND_URL + '/downloadfile',data)
+    return this.http.post<{file:any,fileName:string,file_id:string}>(BACKEND_URL + '/downloadBankStatement',data)
 }
 
 }

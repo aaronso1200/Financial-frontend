@@ -23,7 +23,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            <button mat-raised-button type="submit" >Upload File</button>
+            <button mat-raised-button type="submit" [disabled]="form.invalid" >Upload File</button>
             </div>
         </form>
     <mat-divider></mat-divider>
