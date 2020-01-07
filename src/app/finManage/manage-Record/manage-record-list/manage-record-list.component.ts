@@ -31,10 +31,8 @@ export class FinManageRecordListComponent implements OnInit, OnDestroy {
     });
     this.finManageService.getAccountRecordByDate(this.date);
     this.finManageService.getRecords().pipe(takeUntil(this.unsubscribe)).subscribe( (getrecords: any[]) => {
-
       this.recordsList = getrecords;
       this.isLoading=false;
-      console.log(this.recordsList);
       // console.log(this.recordsList);
     })
   }
@@ -57,7 +55,7 @@ export class FinManageRecordListComponent implements OnInit, OnDestroy {
       minWidth: '450px',
       hasBackdrop: true,
       panelClass: 'my-panel',
-      data: {mode: 'create', date :this.date},
+      data: {mode: 'create', date :this.date,},
       autoFocus: false,
     }).afterClosed().subscribe( result => {
       if (result) {
@@ -103,6 +101,11 @@ export class FinManageRecordListComponent implements OnInit, OnDestroy {
     });
   }
 
+  refresh() {
+    this.isLoading = true;
+    this.finManageService.getAccountRecordByDate(this.date);
+  }
+
   info(id){
     const record = this.recordsList.find((data) => {
       return data.id = id
@@ -117,9 +120,6 @@ export class FinManageRecordListComponent implements OnInit, OnDestroy {
     })
   }
 
-  showalert(){
-    console.log('abc');
-  }
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();

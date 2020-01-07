@@ -33,8 +33,9 @@ private recordId;
                   @Inject(MAT_DIALOG_DATA) public data: any,) {
     console.log(data);
     this.mode = data.mode;
-      this.date = data.date;
+    this.date = data.date;
     this.recordId = data.id;
+    this.accountSelectFrom = data.account
   }
 
   ngOnInit() {

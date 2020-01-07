@@ -35,7 +35,6 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.isLoading=false;
 
     this.form = new FormGroup({
       'account': new FormControl(null, {
@@ -57,6 +56,20 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
 
   }
 
+  create() {
+    const dialogRef = this.dialog.open(ManageRecordEditComponent, {
+      minWidth: '450px',
+      hasBackdrop: true,
+      panelClass: 'my-panel',
+      data: {mode: 'create', date : new Date(), account: this.form.get('account').value},
+      autoFocus: false,
+    }).afterClosed().subscribe( result => {
+      if (result) {
+        this.finManageService.getAccountRecordByAccount(this.data);
+        this.date=result.date;
+      }
+    });
+  }
   recordEdit(id){
     const result: any = this.recordsList.find((data) => {
       return data.id === id;
@@ -89,6 +102,11 @@ export class FinManageRecordByAccountComponent implements OnInit, OnDestroy {
         this.finManageService.getAccountRecordByAccount(this.data)
       }
     });
+  }
+
+  refresh() {
+    this.isLoading = true;
+    this.finManageService.getAccountRecordByAccount(this.data)
   }
 
   submitFilter(){
