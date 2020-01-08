@@ -12,7 +12,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material';
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
  imports: [ MatInputModule,
@@ -34,7 +34,8 @@ import {MatGridListModule} from '@angular/material';
    MatSnackBarModule,
    MatSelectModule,
    MatTabsModule,
-   MatGridListModule
+   MatGridListModule,
+   DragDropModule
  ],
   providers: [ MatDatepickerModule,],
   exports: [MatInputModule,
@@ -56,7 +57,8 @@ import {MatGridListModule} from '@angular/material';
     MatSnackBarModule,
     MatSelectModule,
     MatTabsModule,
-    MatGridListModule
+    MatGridListModule,
+    DragDropModule
   ]
 })
 

@@ -12,6 +12,7 @@ import {MatIconRegistry} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import{LoadingSpinnerComponent} from "./common/loading-spinner-component";
 import {Router} from "@angular/router";
+import {CommonService} from "./common/common.service";
 
 @Component({
   selector: 'app-root',

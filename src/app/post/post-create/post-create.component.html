@@ -5,7 +5,7 @@
           <input formControlName="title"
                  matInput
                  name="title"
-                 placeholder="Post name"
+                 placeholder="Memo name"
                  type="text"
           >
           <mat-icon matSuffix>
@@ -33,7 +33,7 @@
           <textarea formControlName="content"
                     matInput
                     name="content"
-                    placeholder="Post content">
+                    placeholder="Memo content">
         </textarea>
           <mat-icon matSuffix>
               <span class="valid-icon fadeIn animated" *ngIf="form.get('content').valid">sentiment_very_satisfied</span>
@@ -43,9 +43,9 @@
                 <div *ngIf="form.get('content').hasError('required')">This field is required</div>
           </mat-error>
       </mat-form-field>
-      <button mat-raised-button type="submit" [disabled]="form.invalid">save post</button>
+      <button mat-raised-button type="submit" [disabled]="form.invalid">Save memo</button>
       <br>
-      <button mat-raised-button type="button" (click)= "autoGeneratePost()"> Auto generate 10 posts</button>
+<!--      <button mat-raised-button type="button" (click)= "autoGeneratePost()"> Auto generate 10 posts</button>-->
       <br>
   </form>
 </mat-card>

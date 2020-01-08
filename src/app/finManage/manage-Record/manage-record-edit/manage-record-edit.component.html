@@ -1,6 +1,8 @@
 
 <div>
-  <h1>{{mode | titlecase}}</h1>
+  <h1  cdkDrag
+       cdkDragRootElement=".cdk-overlay-pane"
+       cdkDragHandle>{{mode | titlecase}}</h1>
   <br>
   <form (submit) = "onSave(createForm)" #createForm = "ngForm">
       <mat-form-field *ngIf="isMobile===false"  >

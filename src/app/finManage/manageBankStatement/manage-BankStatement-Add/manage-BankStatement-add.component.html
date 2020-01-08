@@ -28,8 +28,10 @@
         </form>
     <mat-divider></mat-divider>
     <loading-spinner [isLoading]="isLoading"></loading-spinner>
+    <div *ngIf="form.get('bank_statement').hasError('invalidfile')"> Upload file is not a valid pdf file. </div>
     <div *ngIf="!isLoading">
-        <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display:block"></pdf-viewer>
+        <pdf-viewer [src]="pdfSrc" [render-text]="false" style="display:block"></pdf-viewer>
     </div>
     <br>
 </mat-list>
+

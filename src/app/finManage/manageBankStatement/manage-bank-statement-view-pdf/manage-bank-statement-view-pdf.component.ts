@@ -7,6 +7,9 @@ import {Subject} from "rxjs";
 import {FinManageService} from "../../finManage.service";
 import {takeUntil} from "rxjs/operators";
 import {LoadingSpinnerComponent} from "../../../common/loading-spinner-component";
+import {int} from "aws-sdk/clients/datapipeline";
+import {ManageRecordEditComponent} from "../../manage-Record/manage-record-edit/manage-record-edit.component";
+import {MatDialog} from "@angular/material";
 
 const BACKEND_URL = environment.backendURL + '/finManage';
 
@@ -22,19 +25,21 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
   private pdfSrc:Uint8Array;
   private unsubscribe: Subject<boolean> = new Subject();
   accountList: any[] =[];
-   months;
-   years;
+   months: Array<int>;
+   years: Array<int>;
    currentDate = new Date();
   private file: Blob;
   private fileName: string;
   private fileNotfound: boolean = true;
   isLoading: boolean = true;
   isAllowDownload: boolean = false;
-  file_id: string;
+  fileId: string;
+  fileCounts: Array<int>;
 
-  constructor(private http: HttpClient,private finManageService: FinManageService  ) {
-    this.months = Array(12).fill(1).map((x,i)=>x+i);
-    this.years =  Array(50).fill(2000).map((x,i)=>x+i);
+  constructor(private dialog: MatDialog,private http: HttpClient,private finManageService: FinManageService  ) {
+    this.months = Array<int>(12).fill(1).map((x,i)=>x+i);
+    this.years =  Array<int>(50).fill(2000).map((x,i)=>x+i);
+    this.fileCounts =  Array<int>(1).fill(1).map((x,i)=>x-i);
   }
 
   ngOnInit() {
@@ -50,11 +55,13 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
       }),
       'finAccountId': new FormControl(null, {
         validators: [Validators.required],
-      })
+      }),
+      'fileNumber': new FormControl(null, {})
     });
-    this.form.patchValue({year: this.currentDate.getFullYear(),month: this.currentDate.getMonth()+1});
+    this.form.patchValue({year: this.currentDate.getFullYear(),month: this.currentDate.getMonth()+1,fileNumber: 1});
     this.form.get('year').updateValueAndValidity();
     this.form.get('month').updateValueAndValidity();
+    this.form.get('fileNumber').updateValueAndValidity();
 
     this.form.valueChanges.subscribe(()=>{this.formOnChange()});
     this.isLoading=false;
@@ -73,7 +80,7 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
       this.form.controls[i].markAsTouched();
   }
   formOnChange() {
-    let data = {year: this.form.get('year').value,month: this.form.get('month').value,finAccountId: this.form.get('finAccountId').value};
+    let data = {year: this.form.get('year').value,month: this.form.get('month').value,finAccountId: this.form.get('finAccountId').value,fileNumber: this.form.get('fileNumber').value};
     // this.form.patchValue(data);
 
     // Force form to show validation
@@ -83,17 +90,21 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
     if(!this.form.invalid) {
       this.fileNotfound = false;
       this.isLoading= true;
-      this.finManageService.getBankStatement(this.form.get('year').value,this.form.get('month').value,this.form.get('finAccountId').value)
-          .subscribe((result: {file:any,fileName:string,file_id:string})=> {
+      this.finManageService.getBankStatement(this.form.get('year').value,this.form.get('month').value,this.form.get('finAccountId').value,this.form.get('fileNumber').value)
+          .subscribe((result: {file:any,fileName:string,file_id:string,file_count: number})=> {
         this.isLoading = false;
         if (!result.file) {
           this.fileNotfound = true;
           return ;
         }
+        if(result.file_count > 0) {
+          this.fileCounts =  Array<int>(result.file_count).fill(1).map((x,i)=>x+i);
+        }
+
         this.isAllowDownload = true;
-        this.file_id = result.file_id;
-        const ab =new ArrayBuffer(result.file.data.length);
-        const view = new Uint8Array(ab);
+        this.fileId = result.file_id;
+        let ab =new ArrayBuffer(result.file.data.length);
+        let view = new Uint8Array(ab);
         for (let i = 0; i < result.file.data.length; i++) {
           view[i] = result.file.data[i];
         }
@@ -105,6 +116,8 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
         // console.log(this.file);
         // this.downloadButtonDisabled = false;
         this.isLoading=false;
+        ab = null;
+        view = null
       })
     }
     }
@@ -120,11 +133,20 @@ export class ManageBankStatementViewPdfComponent implements OnInit {
 
   deleteBankStatement() {
     this.isLoading = true;
-    this.finManageService.deleteBankStatement(this.file_id).then(()=> {
-      this.file_id = '';
+    this.finManageService.deleteBankStatement(this.fileId).then(()=> {
+      this.fileId = '';
       this.isLoading = false;
       this.pdfSrc = new Uint8Array();
       this.formOnChange();
     })
+  }
+  addRecord() {
+    const dialogRef = this.dialog.open(ManageRecordEditComponent, {
+      minWidth: '450px',
+      hasBackdrop: true,
+      panelClass: 'my-panel',
+      data: {mode: 'create'},
+      autoFocus: false,
+    }).afterClosed().subscribe();
   }
 }

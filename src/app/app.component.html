@@ -14,7 +14,7 @@
       <button mat-button id="changePassword" (click)= "changePassword()" [autofocus]="false" routerLink="/change-password"><mat-icon>account_circle</mat-icon>  Change password</button>
       <button mat-button id="profile" (click)= "openProfile()" [autofocus]="false"><mat-icon>account_circle</mat-icon>  {{profile?.displayName}}</button>
       <button mat-button (click)="sidenav.close();menuText='Verify Account'" routerLink="/verification"><mat-icon>local_post_office</mat-icon> Verify Account </button>
-      <button mat-button (click)="sidenav.close();menuText='New Post'" routerLink="/post-create"><mat-icon>local_post_office</mat-icon> New Post </button>
+      <button mat-button (click)="sidenav.close();menuText='New Memo'" routerLink="/post-create"><mat-icon>local_post_office</mat-icon> New Memo </button>
     <!--<button mat-button routerLink="finManage" (click)="sidenav.close();menuText='Account Manage'"><mat-icon>account_balance</mat-icon>Financial Account Management</button>-->
     <mat-expansion-panel class="mat-elevation-z0" >
       <mat-expansion-panel-header style="padding-left:16px" [collapsedHeight]="'50px'" [expandedHeight]="'50px'">
@@ -24,12 +24,12 @@
       </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <a mat-button routerLink= "/finManage/manageAccount" (click) ="sidenav.close()" style="color:black"> Add Account</a>
-      <a mat-button routerLink= "/finManage/manageRecord" (click) ="sidenav.close()" style="color:black" > Add record </a>
-      <a mat-button routerLink= "/finManage/manageBankStatementAdd" (click) ="sidenav.close()" style="color:black" > Upload Bank Statement </a>
-      <a mat-button routerLink= "/finManage/manageBankStatementViewPdf" (click) ="sidenav.close()"  style="color:black" > View Bank Statement </a>
-      <a mat-button routerLink="/finManage/recordByAccount" (click)="sidenav.close()" style="color:black"> Account records</a>
-      <a mat-button routerLink= "/finManage/information" (click) ="sidenav.close()" style="color:black" > Analysis</a>
+      <a mat-button routerLink= "/finManage/manageAccount" (click) ="sidenav.close();menuText='Manage Financial Account'" style="color:black"> Add Account</a>
+      <a mat-button routerLink= "/finManage/manageRecord" (click) ="sidenav.close();menuText='Manage Financial Record'" style="color:black" > Add record </a>
+      <a mat-button routerLink= "/finManage/manageBankStatementAdd" (click) ="sidenav.close();menuText='Add Bank Statements'" style="color:black" > Upload Bank Statement </a>
+      <a mat-button routerLink= "/finManage/manageBankStatementViewPdf" (click) ="sidenav.close();menuText='View Bank Statements'"  style="color:black" > View Bank Statement </a>
+      <a mat-button routerLink="/finManage/recordByAccount" (click)="sidenav.close();menuText='View record by account'" style="color:black"> Account records</a>
+      <a mat-button routerLink= "/finManage/information" (click) ="sidenav.close();menuText='Verify Account'" style="color:black" > Analysis</a>
 
     </mat-expansion-panel>
     </div> <!-- Authenticated end-->

@@ -61,3 +61,10 @@
   text-align: center !important;
 }
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  width: 95%;
+  text-align: right;
+}

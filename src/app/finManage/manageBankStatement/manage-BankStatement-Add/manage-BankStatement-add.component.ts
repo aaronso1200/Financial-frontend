@@ -88,9 +88,6 @@ export class ManageBankStatementAddComponent implements OnInit,OnDestroy {
 
   onSave() {
    if (this.form.invalid) {
-      if (this.form.get('bank_statement').hasError('invalidfile')) {
-       alert("Please upload File and make sure it is a pdf");
-     }
      this.markAllAsTouched();
      return false
    }

@@ -232,9 +232,9 @@ deleteBankStatement(fileId:string) {
 
 }
 
-getBankStatement(year:string, month:string,finAccountId:number) {
-  let data = {year: year,month: month,finAccountId: finAccountId};
-    return this.http.post<{file:any,fileName:string,file_id:string}>(BACKEND_URL + '/downloadBankStatement',data)
+getBankStatement(year:string, month:string,finAccountId:number,fileNumber:number) {
+  let data = {year: year,month: month,finAccountId: finAccountId,fileNumber:fileNumber};
+    return this.http.post<{file:any,fileName:string,file_id:string, file_count:number}>(BACKEND_URL + '/downloadBankStatement',data)
 }
 
 }

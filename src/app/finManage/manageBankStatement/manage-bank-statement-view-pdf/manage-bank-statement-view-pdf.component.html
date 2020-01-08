@@ -20,10 +20,18 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field>
+          <mat-label>File No.</mat-label>
+          <mat-select formControlName ="fileNumber" >
+              <mat-option *ngFor="let count of fileCounts"  [value]=count >
+                  {{count}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
   </form>
         <span class="space"></span>
-        <button mat-raised-button [disabled]="!isAllowDownload" (click)="downloadFile()" >Download</button>
-      <button mat-raised-button [disabled]="!isAllowDownload" (click)="deleteBankStatement()" >Delete</button>
+        <button mat-icon-button [disabled]="!isAllowDownload" (click)="downloadFile()" ><mat-icon>cloud_download</mat-icon></button>
+      <button mat-icon-button [disabled]="!isAllowDownload" (click)="deleteBankStatement()" ><mat-icon>delete</mat-icon></button>
     </div>
   <mat-divider></mat-divider>
   <!--<div *ngIf = 'isLoading' class= "spinner"><mat-spinner ></mat-spinner>-->
@@ -35,7 +43,7 @@
       <p> No records.</p>
     </div>
     <div *ngIf="!fileNotfound ">
-      <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display:block"></pdf-viewer>
+      <pdf-viewer [src]="pdfSrc" [render-text]="false" style="display:block"></pdf-viewer>
     </div>
 
   </div>
@@ -43,4 +51,6 @@
 
   <br>
 </mat-list>
-
+<div class = "footer">
+<button mat-mini-fab color = "primary" (click)="addRecord()"><mat-icon>add</mat-icon></button>
+</div>
